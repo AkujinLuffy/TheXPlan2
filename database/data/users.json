@@ -1,0 +1,10 @@
+[
+  {
+    "_id": "65f8e4b1c1b9f8b8f8f8f8f8",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "hashed_password_here",
+    "createdAt": "2025-03-03T10:00:00Z",
+    "updatedAt": "2025-03-03T10:00:00Z"
+  }
+]
