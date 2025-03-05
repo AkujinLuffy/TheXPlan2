@@ -5,6 +5,17 @@ import { TaskDelete } from "./endpoints/taskDelete";
 import { TaskFetch } from "./endpoints/taskFetch";
 import { TaskList } from "./endpoints/taskList";
 
+//import from server js
+import cors from 'cors';
+import dotenv from 'dotenv';
+import connectDB from './config/db';
+
+// Load environment variables
+dotenv.config();
+
+// Connect to MongoDB
+connectDB();
+
 // Start a Hono app
 const app = new Hono();
 
