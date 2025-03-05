@@ -1,39 +1,37 @@
 import { fromHono } from "chanfana";
 import { Env, Hono } from "hono";
+
+import cors from 'cors';
+import dotenv from 'dotenv';
+
+
+import { MongoClient } from "mongodb";
+
+dotenv.config();
+
 // import { TaskCreate } from "./endpoints/taskCreate";
 // import { TaskDelete } from "./endpoints/taskDelete";
 // import { TaskFetch } from "./endpoints/taskFetch";
 // import { TaskList } from "./endpoints/taskList";
 
-import cors from 'cors';
-import dotenv from 'dotenv';
-// import connectDB from './config/db';
-import { MongoClient } from "mongodb";
-
-dotenv.config();
-
-console.log(process.env.MONGO_URI);
-
-// REQUEST
-// REQUEST (MIDDLEWARE) -> HANDLER (DB)
-
+// TODO: CONVERT THIS TO MIDDLEWARE ⬇️
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
+		// @ts-expect-error
+		const tlsClient = new MongoClient(env.MONGO_URI);
+		await tlsClient.connect();
 
-		// console.log(env);
+		const db = tlsClient.db('test');
 
-		// // connect to atlas mongodb
-		// const tlsClient = new MongoClient();
-		// await tlsClient.connect();
+		const progress = (await db.collection('progress').find({}).toArray());
 
-		// // connect to mongo running locally
-		// const client = new MongoClient('mongodb://localhost:27017');
-		// await client.connect();
+		console.log(progress);
 
-		// const db = tlsClient.db('test');
-		// const users = await db.collection('users').find({}).toArray().limit(10);
+		
+		// import connectDB from './config/db';
+		// TODO: ⬆️ middleware
 
-		return Response.json(JSON.stringify(env))
+		return Response.json({});
 	},
 } satisfies ExportedHandler<Env>;
 

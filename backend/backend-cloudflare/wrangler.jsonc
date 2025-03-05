@@ -51,5 +51,9 @@
     "net": "cf-mongodb-polyfills/net",
     "dns": "cf-mongodb-polyfills/dns",
     "tls": "cf-mongodb-polyfills/tls",
-  }
+  },
+  "keep_vars": true,
+  "placement": {
+    "mode": "smart"
+  },
 }
